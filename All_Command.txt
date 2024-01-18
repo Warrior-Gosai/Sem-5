@@ -1,0 +1,370 @@
+👉 Operator : 
+https://docs.oracle.com/cd/E12095_01/doc.10303/e12092/sqopr.htm
+
+👉 DDL (Data Definition Language) 
+1) CREATE :
+🔸 CREATE TABLE 
+⚪ Method - 1
+CREATE TABLE table_name  
+(   
+  column1 datatype [ NULL | NOT NULL ],  
+  column2 datatype [ NULL | NOT NULL ],  
+  ...  
+  column_n datatype [ NULL | NOT NULL ]  
+CONSTRAINT name_of_constraint PRIMARY KEY (column_name)
+);
+
+⚪ Method - 2
+(Note: If you create the table in this way, the new table will contain records from the existing table.)
+CREATE TABLE new_table  
+AS (SELECT * FROM old_table);   
+
+🔸 CREATE VIEW :
+(As Shown Below - Unit - 4)
+
+2) ALTER :
+⚪ ADD :
+ALTER TABLE table_name  
+  ADD column_name column-definition; 
+⚪ MODIFY :
+ALTER TABLE table_name  
+  MODIFY column_name column_type; 
+⚪ DROP : 
+ALTER TABLE table_name  
+  DROP COLUMN column_name;  
+⚪ RENAME : 
+ALTER TABLE table_name  
+  RENAME COLUMN old_name to new_name;  
+
+3) RENAME :
+
+
+4) DROP :
+DROP TABLE Table_name;
+
+5) TRUNCATE :
+TRUNCATE TABLE Table_name;
+
+
+👉 DML (Data Manipulation Language)
+1) SELECT :
+SELECT expressions  
+FROM tables  
+WHERE conditions;   
+
+2) INSERT :
+⚪ Method - 1
+INSERT INTO table_name
+(column1, column2, ... column_n )  
+VALUES  
+(Value1, value2, ... Value_n );   
+⚪ Method - 2
+INSERT INTO table_name Values
+(Value1, value2, ... Value_n );
+⚪ Method - 3
+INSERT INTO table_name Values
+(&Value1,  '&value2', &Values3 ... '&Value_n' );
+
+3) UPDATE :
+UPDATE table
+SET column1 = value1,  
+    column2 = value2,  
+    ...  
+    column_n = value_n  
+WHERE conditions;  
+
+4) DELETE :
+DELETE FROM table_name  
+WHERE conditions;   
+
+
+👉 DCL (Data Control Language)
+1) GRANT 
+2) REVOKE 
+
+👉 TPL (Transaction Processing Language)
+1) COMMIT
+2) ROLLBACK 
+3) SAVEPOINT 
+
+
+
+
+
+👉   Clause :-
+
+⚪ WHERE : 
+(To Specify Condition)
+SELECT *
+FROM table_1
+WHERE conditions; 
+
+⚪ HAVING :
+(Must use with GROUP BY)
+SELECT expression1, expression2, ... expression_n,   
+ aggregate_function (aggregate_expression)  
+FROM tables  
+WHERE conditions  
+GROUP BY expression1, expression2, ... expression_n  
+HAVING having_condition;   
+
+⚪ ORDER BY : 
+(Sort by Ascending or Descending Order)
+SELECT expressions  
+FROM tables  
+WHERE conditions  
+ORDER BY expression [ ASC | DESC ];   
+
+⚪ GROUP BY :
+(Make Group of Similar Data)
+SELECT expression1, expression2, ... expression_n,   
+aggregate_function (aggregate_expression)  
+FROM tables  
+WHERE conditions  
+GROUP BY expression1, expression2, ... expression_n;
+
+⚪ DISTINCT :
+(Select Without Duplicate Data)
+SELECT DISTINCT expressions  
+FROM tables  
+WHERE conditions;  
+
+⚪ Like 
+Expression LIKE Pattern
+% (Use For Matching String)
+_ (Use For Matching Single Character)
+
+⚪ In
+(IN clause is used with SELECT, INSERT, UPDATE, or DELETE statement to decrease the use of multiple OR conditions.)
+Expressions IN (value1, value2,.... value n)  
+
+⚪ NOT IN
+Expressions NOT IN (value1, value2,.... value n)
+
+⚪ Between 
+(BETWEEN is used to get the values from given range in select, insert, delete or update statement)
+Expression BETWEEN value1 AND value2;  
+
+
+
+
+=====================================
+Unit - 3
+
+👉  Data Constraints :
+(https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/constraint.html)
+
+⚪ Primary Key :✅
+🔶 ADD PRIMARY KEY :
+
+🔸 Using CREATE Command : 
+CREATE TABLE table_name  
+(  
+  column1 datatype PRIMARY KEY,  
+  column2 datatype, 
+  ...  
+  CONSTRAINT constraint_name PRIMARY KEY (column1, column2, ... column_n)  
+);  
+🔸 Using ALTER Command : 
+ALTER TABLE table_name  
+ADD CONSTRAINT constraint_name PRIMARY KEY (column1, column2, ... column_n);  
+🔶 DROP PRIMARY KEY :
+ALTER TABLE table_name  
+DROP CONSTRAINT constraint_name;  
+
+⚪ Foreign Key :
+🔶 ADD FOREIGN KEY :
+🔸 Using CREATE Command : 
+
+
+
+
+⚪ Check : ✅
+🔶 ADD CHECK CONSTRAINT :
+🔸 Using CREATE Command : 
+CREATE TABLE table_name  
+(  
+  column1 datatype,
+  column2 datatype,
+  ...
+  CONSTRAINT constraint_name CHECK (column_name condition) [DISABLE]  
+);  
+🔸 Using ALTER Command : 
+ALTER TABLE table_name  
+ADD CONSTRAINT constraint_name CHECK (column_name <condition>) ;
+🔶 DROP CHECK CONSTRAINT : 
+ALTER TABLE table_name  
+DROP CONSTRAINT constraint_name;  
+
+⚪ Unique :✅
+🔶 ADD CONSTRAINT :
+🔸 Using CREATE Command : 
+CREATE TABLE table_name  
+(  
+  column1 datatype UNIQUE,  
+  column2 datatype, 
+  ...  
+  CONSTRAINT constraint_name UNIQUE (column1, column2, ... column_n)  
+);  
+🔸 Using ALTER Command : 
+ALTER TABLE table_name  
+ADD CONSTRAINT constraint_name UNIQUE (column1, column2, ... column_n);  
+🔶 DROP CONSTRAINT : 
+ALTER TABLE table_name  
+DROP CONSTRAINT constraint_name;  
+
+
+⚪ Not NULL  :
+🔶 ADD CONSTRAINT :
+🔸 Using CREATE Command : 
+CREATE TABLE table_name  
+(  
+  column1 datatype NULL/Not NULL,  
+  column2 datatype NULL/Not NULL,  
+....
+);  
+🔸 Using ALTER Command : 
+
+
+
+
+
+
+
+ 
+
+👉 Built-in Function :
+https://beginner-sql-tutorial.com/oracle-functions.htm
+
+
+
+
+Aggregate Function :
+MAX
+MIN
+XMLAGG
+AVG
+COUNT
+SUM
+FIRST
+LAST
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=====================================
+Unit - 4
+
+👉 Sub-Query :
+
+
+
+
+👉 JOIN :
+🔹Cross Joins (Cartesian Products)
+🔹Inner Joins (Simple Join)
+🔹Outer Joins
+     🔸Left Outer Join (Left Join)
+     🔸Right Outer Join (Right Join)
+     🔸Full Outer Join (Full Join)
+🔹Self Joins
+
+➡️
+
+🔹Cross Joins (Cartesian Products)
+▫️SELECT * FROM table1, table2;
+▫️SELECT *  FROM table1 CROSS JOIN table2; 
+
+🔹Inner Joins (Simple Join)
+▫️
+▫️SELECT columns FROM table1 INNER JOIN table2 ON table1.column = table2.column;   
+
+🔹Outer Joins
+     🔸Left Outer Join (Left Join)
+SELECT columns FROM table1 LEFT [OUTER] JOIN table2 ON table1.column =table2.column; 
+
+     🔸Right Outer Join (Right Join)
+SELECT columns FROM table1 RIGHT [OUTER] JOIN table2 ON table1.column =table2.column;
+
+     🔸Full Outer Join (Full Join)
+SELECT columns FROM table1 FULL [OUTER] JOIN table2 ON table1.column = table2.column; 
+
+🔹Self Joins
+SELECT a.column_name, b.column_name...   
+FROM table1 a, table1 b   
+WHERE a.common_filed = b.common_field;
+
+👉 View :
+⚪ CREATE VIEW :
+CREATE VIEW view_name AS  
+SELECT columns  
+FROM tables  
+WHERE conditions;  
+⚪ UPDATE VIEW :
+CREATE OR REPLACE VIEW view_name AS  
+  SELECT columns  
+  FROM table  
+  WHERE conditions;   
+⚪ DROP VIEW :
+DROP VIEW view_name;  
+
+
+👉 Sequence : 
+
+👉 Index :
+ 
+ 👉 Synonyms : 
+
+
+
+
+👉 CLAUSE :
+⚪ UNION  : 
+SELECT expression1, expression2, ... expression_n  
+FROM table1  
+WHERE conditions  
+UNION  
+SELECT expression1, expression2, ... expression_n  
+FROM table2  
+WHERE conditions;   
+
+⚪ UNION ALL :
+SELECT expression1, expression2, ... expression_n  
+FROM table1  
+WHERE conditions  
+UNION ALL  
+SELECT expression1, expression2, ... expression_n  
+FROM table2  
+WHERE conditions;   
+
+⚪ INTERSECT :
+SELECT expression1, expression2, ... expression_n  
+FROM table1  
+WHERE conditions  
+INTERSECT  
+SELECT expression1, expression2, ... expression_n  
+FROM table2  
+WHERE conditions;  
+
+⚪ MINUS :
+SELECT expression1, expression2, ... expression_n  
+FROM table1  
+WHERE conditions  
+MINUS  
+SELECT expression1, expression2, ... expression_n  
+FROM table2  
+WHERE conditions;  
+
+
+
