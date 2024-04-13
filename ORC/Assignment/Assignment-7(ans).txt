@@ -1,0 +1,37 @@
+ASSIGNMENT:5
+
+1. Display all the information of the EMP table? 
+->SELECT *FROM EMP;
+
+2. Display unique Jobs from EMP table?
+->SELECT DISTINCT JOB FROM EMP;
+
+3. List the emps in the asc order of their Salaries? 
+->SELECT EMPNO,ENAME,JOB FROM EMP ORDER BY SAL ASC;
+
+4. List the details of the emps in asc order of the Dptnos and desc of Jobs? 
+->SELECT * FROM EMP ORDER BY DEPTNO DESC;
+OR
+-> SELECT DEPTNO,ENAME FROM EMP ORDER BY DEPTNO DESC;
+
+5. Display all the unique job groups in the descending order? 
+->SELECT ENAME,JOB FROM EMP ORDER BY JOB DESC;
+
+6. Display all the details of all ‘Mgrs’
+->SELECT MGR FROM EMP ;
+
+7. List the emps who joined before 1981.
+->SELECT ENAME FROM EMP WHERE HIREDATE LIKE '%80';
+
+8. List the Empno, Ename, Sal, Daily sal of all emps in the asc order of Annsal.
+->SELECT Empno, Ename, SAL/30 'DAILY SAL',SAL*12'ANNUAL SAL' FROM EMP ORDER BY SAL*12;
+
+9. Display the Empno, Ename, job, Hiredate, Exp of all Mgrs
+->SELECT  Empno, Ename, job, SYSDATE-HIREDATE "EXPERIANCE" FROM EMP ORDER BY MGR;
+
+10. List the Empno, Ename, Sal, Exp of all emps working for Mgr 7369. 
+->SELECT  Empno, Ename, job, SYSDATE-HIREDATE "EXPERIANCE" FROM EMP WHERE MGR=7369;
+
+
+13. List the emps along with their Exp and Daily Sal is more than Rs.100. 
+->SELECT ENAME,(SYSMDATE-HIREDATE)/365 EXP ,SAL/30 DSAL FROM EMP WHERE (SAL/30)>100;

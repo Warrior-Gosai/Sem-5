@@ -1,0 +1,186 @@
+BCA SEM -5
+ASSIGNMENT NO 3
+
+1.List all information about those employees whose earning at least 1000 and are either  clerk or salesman. 
+-> SELECT * FROM EMP WHERE SAL>=1000 AND(JOB = 'CLERK' OR JOB ='SALESMAN');
+
+2.List all employees of dept no. 30 who are manager, salesman or clerk. 
+->SELECT * FROM EMP WHERE DEPTNO=30 AND(JOB = 'CLERK' OR JOB ='SALESMAN' OR JOB ='MANAGER');
+
+3.List the details of the employees who are not getting commission. 
+->SELECT * FROM EMP WHERE COM = 0 OR COM IS NULL;
+
+4.List the details of the employees which have ‘R’ or ‘r’ followed by ‘s’ or ‘S’ in their name.
+-> SELECT * FROM EMP WHERE ENAME LIKE '%R%S%' OR ENAME LIKE '%r%s%';
+
+5.List all the employees whose earning is in the list followed and whose name starts  with ‘A’ or ‘a’
+  Salary:  1250, 1150, 950, 2975, 5000, 3000, 10000. 
+->SELECT * FROM EMP WHERE (ENAME LIKE 'A%' OR ENAME LIKE 'a%');
+
+6. List all employees whose ‘HIREDATE’ year between 1981 and 1987 with initial  character of name in uppercase and remaining characters in lowercase. 
+-> SELECT * FROM EMP WHERE HIREDATE BETWEEN '1-JAN-1981' AND'31-DEC-1987' AND ENAME = ENTICAP (ENAME);
+
+7.Find the number of employees working in department inputted by user. 
+->SELECT* FROM EMP WHERE DEPTNO=&DEPTNO;
+
+8.Calculate number of employees holding different jobs in different departments. 
+->SELECT DEPTNO , JOB ,COUNT(JOB) FROM EMP GROUP BY DEPTNO , JOB;
+
+(8 AND 9 QUERY IS SAME IN ASSIGNMENT PDF). 
+
+9.Calculate the number of employees excluding president holding different job titles in different departments.
+->SELECT DEPTNO ,JOB,COUNT(JOB) FROM EMP GROUP BY DEPTNO, JOB
+ HAVING JOB <>'PRESIDENT';
+
+11.Display all jobs in different departments each have more than two employees with that job titles. 
+->SELECT DEPTNO, JOB, COUNT(JOB) FROM EMP GROUP BY DEPTNO,JOB
+  HAVING COUNT (JOB)>2;
+
+12.Find all the departments that have at least two clerks. 
+->SELECT DEPTNO, JOB, COUNT(JOB) FROM EMP GROUP BY DEPTNO,JOB
+  HAVING JOB = 'CLERK' AND COUNT(JOB)>=2;
+
+13.Determine average annual salary per department excluding the manager and president.
+->SELECT DEPTNO, AVG(SAL*12)FROM EMP
+  WHERE JOB NOT IN ('MANAGER','PRESIDENT')
+  GROUP BY DEPTNO;
+
+14.List employee job titles immediately followed by name. 
+->SELECT ENAME||JOB FROM EMP;
+
+15.List the department name as four letter code ordered by the department name. 
+->SELECT ENAME,JOB,DEPTNO,DECODE(DEPTNO,,10,'ACCO',20,'RESH',30,'SALE',40,'OPER') FROM EMP;
+
+16.Find out the name of hiredate of the last person hired. 
+->SELECT * FROM (SELECT ENAME,HIREDATE FROM EMP ORDER BY HIREDATE DESC) WHERE ROWNUM=1;
+	0R
+	SELECT ENAME,HIREDATE FROM EMP
+	WHERE HIREDATE=(SELECT MAX(HIREDATE)FROM EMP);
+
+17.Decode deptno into dept name from dept table. 
+->SELECT E.ENAME,E.JOB,E.SAL,E.DEPTNO,D.DNAME
+  FROM EMP E, DEPT D 
+  WHERE E.DEPTNO = D.DEPTNO;
+
+18.List all last characters from the position of character ‘A’ or ‘a’ in ename. 
+->SELECT SUBSTR(ENAME,INSTR (ENAME,'A',1),LENGTH (ENAME))NAME FROM EMP WHERE INSTR (ENAME,'A',1)>0 ;
+OR OTHER METHODS
+
+
+SELECT SUBSTR(ENAME,3,4)FROM EMP;
+SUBS
+----
+LEN
+RD
+NES
+RTIN
+AKE
+ARK
+OTT
+NG
+RNER
+AMS
+MES
+
+SUBS
+----
+RD
+LLER
+
+13 rows selected.
+
+SQL> SELECT INSTR (ENAME,'A',0)FROM  EMP;
+
+INSTR(ENAME,'A',0)
+------------------
+                 0
+                 0
+                 0
+                 0
+                 0
+                 0
+                 0
+                 0
+                 0
+                 0
+                 0
+
+INSTR(ENAME,'A',0)
+------------------
+                 0
+                 0
+
+13 rows selected.
+
+SQL> SELECT INSTR (ENAME,'A',1)FROM  EMP;
+
+INSTR(ENAME,'A',1)
+------------------
+                 1
+                 2
+                 0
+                 2
+                 3
+                 3
+                 0
+                 0
+                 0
+                 1
+                 2
+
+INSTR(ENAME,'A',1)
+------------------
+                 0
+                 0
+
+13 rows selected.
+
+SQL> SELECT ENAME, INSTR (ENAME,'A',1)FROM  EMP;
+
+ENAME      INSTR(ENAME,'A',1)
+---------- ------------------
+ALLEN                       1
+WARD                        2
+JONES                       0
+MARTIN                      2
+BLAKE                       3
+CLARK                       3
+SCOTT                       0
+KING                        0
+TURNER                      0
+ADAMS                       1
+JAMES                       2
+
+ENAME      INSTR(ENAME,'A',1)
+---------- ------------------
+FORD                        0
+MILLER                      0 
+
+19.Find names of the employees who are working in sales department. 
+->SELECT E.ENAME,D.DNAME FROM EMP E, DEPT D WHERE D.DEPTNO=E.DEPTNO AND DNAME='SALES';
+USING SUBQUERY
+	SELECT ENAME,DEPTNO FROM EMP
+	WHERE DEPTNO =(SELECT DEPTNO FROM DEPT WHERE DNAME='SALES');
+
+20.List name, job and salary of the employees in department 20 who have the same job  as that of employees in ‘SALES’ and ‘HRD’. 
+->SELECT ENAME,JOB,SAL FROM EMP WHERE DEPTNO=20 
+AND JOB IN(SELECT JOB FROM EMP WHERE DEPTNO=(SELECT DEPTNO FROM DEPT WHERE DNAME='SALES'OR DNAME='HRD'));
+
+21.Find out the highest paid employee in each department and display their name and  deptno. 
+->
+	ROUGH WORK:
+SELECT ENAME,SAL,DEPTNO FROM EMP WHERE SAL=(SELECT MAX(SAL)FROM EMP);
+	ANSWER:
+SELECT ENAME,SAL,DEPTNO FROM EMP WHERE SAL IN(SELECT MAX(SAL)FROM EMP GROUP BY DEPTNO);
+
+22.List employee who have the same job as that of Mr. Jones and who have more salary   than any one employee of Dept 30. 
+->SELECT E1.ENAME,E1.JOB,E2.JOB FROM EMP E1 ,EMP E2 
+	
+	 SELECT ENAME ,JOB,SAL FROM EMP WHERE JOB=(SELECT JOB FROM EMP WHERE ENAME='JONES') AND SAL>ANY(SELECT SAL FROM EMP WHERE DEPTNO=30);
+
+23.list the employee name , deptno and dept location of all clerks. 
+->
+
+24.List the location of all departments and the employees working at those location. 
+->
+
