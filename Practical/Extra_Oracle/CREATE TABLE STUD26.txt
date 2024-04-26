@@ -1,0 +1,54 @@
+ CREATE TABLE STUD26
+  2  (
+  3  SID NUMBER(3) PRIMARY KEY,
+  4  NAME VARCHAR2(10) NOT NULL,
+  5  CITY VARCHAR2(15)
+  6  );
+
+
+
+CREATE TABLE FEES
+  2  (
+  3  SID NUMBER(3) REFERENCES STUD26,
+  4  AMOUNT NUMBER(7,2),
+  5  FDATE DATE,
+  6  TNO NUMBER(5) UNIQUE,
+  7  SEMESTER NUMBER(2)
+  8  );
+
+
+ DESCRIBE FEES;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                NUMBER(3)
+ AMOUNT                                             NUMBER(7,2)
+ FDATE                                              DATE
+ TNO                                                NUMBER(5)
+ SEMESTER                                           NUMBER(2)
+
+
+ INSERT INTO STUD26 VALUES(1,'GAUTAM','MAHUVA');
+
+INSERT INTO STUD26 VALUES(2,'ASHISH','MAHUVA');
+
+INSERT INTO STUD26 VALUES(3,'KARTIK','MAHUVA');
+
+SELECT * FROM STUD26;
+
+       SID NAME       CITY
+---------- ---------- ---------------
+         1 GAUTAM     MAHUVA
+         2 ASHISH     MAHUVA
+         3 KARTIK     MAHUVA
+
+
+
+INSERT INTO FEES VALUES(1,20000,'1-JAN-23',4532,1);
+
+SELECT * FROM FEES;
+
+     SELECT * FROM FEES;
+
+       SID     AMOUNT FDATE            TNO   SEMESTER
+---------- ---------- --------- ---------- ----------
+         1      20000 01-JAN-23       4532          1

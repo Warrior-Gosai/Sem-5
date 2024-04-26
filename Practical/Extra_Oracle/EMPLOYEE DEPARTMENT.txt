@@ -1,0 +1,89 @@
+SQL> create table department
+  2  (
+  3  dept_id number(3) primary key,
+  4  dname varchar2(20) not null,
+  5  dept_loc varchar2(20) not null
+  6  );
+
+Table created.
+
+SQL> CREATE TABLE EMPLOYEE
+  2  (
+  3  EMP_ID NUMBER(3) PRIMARY KEY,
+  4  EMP_NAME VARCHAR2(20) NOT NULL,
+  5  DOJ DATE,
+  6  DOB DATE,
+  7  SALARY NUMBER(7) NOT NULL,
+  8  DEPT_ID NUMBER(3) REFERENCES DEPARTMENT(DEPT_ID));
+
+Table created.
+
+
+
+Table created.
+
+SQL> DESC DEPARTMENT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_ID                                   NOT NULL NUMBER(3)
+ DNAME                                     NOT NULL VARCHAR2(20)
+ DEPT_LOC                                  NOT NULL VARCHAR2(20)
+
+SQL> DESC EMPLOYEE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                    NOT NULL NUMBER(3)
+ EMP_NAME                                  NOT NULL VARCHAR2(20)
+ DOJ                                                DATE
+ DOB                                                DATE
+ SALARY                                             NUMBER(3)
+
+
+
+SQL> SELECT * FROM DEPARTMENT;
+
+
+
+SQL> SELECT * FROM DEPARTMENT;
+
+
+
+
+
+INSERT INTO EMPLOYEE VALUES(101,'JOHN','30-JAN-1995','12-MAR-1970',12000,1);
+INSERT INTO EMPLOYEE VALUES(102,'MARK','13-OCT-2003','22-OCT-1999',15000,2);
+INSERT INTO EMPLOYEE VALUES(103,'WOOD','18-MAR-2002','5-APR-1975',10250,4);
+INSERT INTO EMPLOYEE VALUES(104,'SMITH','3-DEC-2005','2-OCT-1979',12750,5);
+INSERT INTO EMPLOYEE VALUES(105,'DEVID','8-NOV-2004','1-NOV-1980',17000,7);
+INSERT INTO EMPLOYEE VALUES(106,'ROOT','2-JUN-2000','14-DEC-1985',25200,8);
+INSERT INTO EMPLOYEE VALUES(107,'VIRAT','31-JUL-2001','17-JAN-1982',32000,10);
+INSERT INTO EMPLOYEE VALUES(108,'ROHIT','25-OCT-2016','26-OCT-1984',29900,5);
+INSERT INTO EMPLOYEE VALUES(109,'HARDIK','16-APR-2015','28-JUN-1990',22000,4);
+INSERT INTO EMPLOYEE VALUES(110,'JADEJA','19-SEP-2010','29-JUL-1984',27000,7);
+
+
+
+
+
+ SELECT * FROM EMPLOYEE;
+
+ SELECT DEPT_ID,DNAME FROM DEPARTMENT;
+
+ SELECT * FROM EMPLOYEE WHERE SALARY >=25000;
+
+ SELECT * FROM EMPLOYEE ORDER BY EMP_NAME;
+
+ UPDATE EMPLOYEE SET SALARY=SALARY+500;
+
+ SELECT * FROM EMPLOYEE;
+
+ SELECT * FROM EMPLOYEE WHERE DOB LIKE '%OCT%';
+
+ SELECT * FROM DEPARTMENT WHERE DNAME='SALES';
+
+ SELECT EMP_NAME,SALARY FROM EMPLOYEE WHERE SALARY IN(SELECT MAX(SALARY) FROM EMPLOYEE);
+
+SELECT * FROM EMPLOYEE WHERE ((SYSDATE-DOJ)/365)>10 ;
+
+SELECT DEPT_ID,COUNT(*) FROM EMPLOYEE GROUP BY DEPT_ID;
+

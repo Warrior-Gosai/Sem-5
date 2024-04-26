@@ -1,0 +1,13 @@
+ select * from emp where sal >= 1000 and (job='CLERK' or job='SALESMAN');
+
+ select * from emp where deptno=30 and (job='CLERK' or job='SALESMAN' or job='MANAGER');
+
+ SELECT * FROM EMP WHERE COMM IS NULL OR COMM=0; ||   SELECT * FROM EMP WHERE COMM IS NULL ;
+
+
+
+SELECT * FROM EMP WHERE ENAME LIKE'%rs%';
+
+SELECT * FROM EMP WHERE ENAME LIKE'%a%' AND SAL=1250 OR SAL=1150 OR SAL=950 OR SAL=2975 OR SAL=5000 OR SAL=3000 OR SAL=10000 ;
+
+
